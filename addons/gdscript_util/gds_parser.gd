@@ -328,4 +328,6 @@ static func _parse_tokens( stream:StreamPeerBuffer, count:int ) -> Array:
 		else:
 			tk.token_id = c & TOKEN_MASK
 
+		r.append( tk )
+
 	return r
