@@ -1,0 +1,9 @@
+.import/*
+*.import
+default_env.tres
+icon.png
+project.godot
+Main.tscn
+main.gd
+test.gd
+dev/*
