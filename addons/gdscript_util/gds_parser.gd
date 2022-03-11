@@ -54,7 +54,7 @@ const TOKEN_NAME_TABLE:Array = [
 	"OP_BIT_OR",
 	"OP_BIT_XOR",
 	"OP_BIT_INVERT",
-	# "OP_PLUS_PLUS",
+	# "OP_PLUS_PLUS",		# ソース中に存在はするが、コメントアウトされている
 	# "OP_MINUS_MINUS",
 	"CF_IF",
 	"CF_ELIF",
@@ -89,7 +89,7 @@ const TOKEN_NAME_TABLE:Array = [
 	"PR_REMOTE",
 	"PR_SYNC",
 	"PR_MASTER",
-	"PR_SLAVE",				# Deprecated by PR_PUPPET", to remove in 4.0
+	"PR_SLAVE",	# 4.0で削除される
 	"PR_PUPPET",
 	"PR_REMOTESYNC",
 	"PR_MASTERSYNC",
@@ -115,7 +115,7 @@ const TOKEN_NAME_TABLE:Array = [
 	"CONST_NAN",
 	"ERROR",
 	"EOF",
-	"CURSOR",				# used for code completion
+	"CURSOR",	# コードコンパイル用
 	"MAX"
 ]
 
@@ -193,7 +193,7 @@ enum Token {
 	PR_REMOTE,
 	PR_SYNC,
 	PR_MASTER,
-	PR_SLAVE,				# Deprecated by PR_PUPPET, to remove in 4.0
+	PR_SLAVE,	# 4.0で削除される
 	PR_PUPPET,
 	PR_REMOTESYNC,
 	PR_MASTERSYNC,
@@ -219,7 +219,7 @@ enum Token {
 	CONST_NAN,
 	ERROR,
 	EOF,
-	CURSOR,					# used for code completion
+	CURSOR,	# コードコンパイル用
 	MAX
 }
 
