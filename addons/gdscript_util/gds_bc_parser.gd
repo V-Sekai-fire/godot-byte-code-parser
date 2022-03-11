@@ -223,7 +223,7 @@ enum Token {
 	MAX
 }
 
-class GDScriptParseResult:
+class GDScriptByteCodeParseResult:
 	var succeed:bool = false
 	var byte_code_version:int = 0
 	var identifiers:Array = []
@@ -242,8 +242,8 @@ class GDScriptToken:
 		self.token_id = _token_id
 		self.param = _param
 
-static func parse( code:PoolByteArray ) -> GDScriptParseResult:
-	var result: = GDScriptParseResult.new( )
+static func parse( code:PoolByteArray ) -> GDScriptByteCodeParseResult:
+	var result: = GDScriptByteCodeParseResult.new( )
 	var stream: = StreamPeerBuffer.new( )
 	stream.set_data_array( code )
 
