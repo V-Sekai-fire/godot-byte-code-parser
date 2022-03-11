@@ -7,7 +7,7 @@ extends Node
 # MIT License
 #
 
-class_name GDScriptParser
+class_name GDScriptByteCodeParser
 
 const TOKEN_BITS:int = 8
 const TOKEN_BYTE_MASK:int = 0x80
@@ -329,5 +329,7 @@ static func _parse_tokens( stream:StreamPeerBuffer, count:int ) -> Array:
 			tk.token_id = c & TOKEN_MASK
 
 		r.append( tk )
+
+		# printt( i, TOKEN_NAME_TABLE[tk.token_id], tk.param )
 
 	return r
