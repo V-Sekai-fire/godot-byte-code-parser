@@ -7,7 +7,7 @@ extends Node
 # MIT License
 #
 
-class_name GDScriptParser
+class_name GDScriptASTParser
 
 const ByteCode = preload("gds_bc_parser.gd")
 
