@@ -1,5 +1,7 @@
 # GDScript Parser for Godot Engine 3.4
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/E1E44AWTA)
+
 A GDScript ByteCode parser for Godot Engine 3.4.
 
 ## Documents

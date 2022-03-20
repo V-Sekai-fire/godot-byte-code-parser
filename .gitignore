@@ -6,4 +6,6 @@ project.godot
 Main.tscn
 main.gd
 test.gd
+test_a.gd
+test_b.gd
 dev/*
