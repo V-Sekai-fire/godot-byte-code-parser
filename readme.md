@@ -1,4 +1,4 @@
-# GDScriptByteCode Parser for Godot Engine 3.4
+# GDScript Parser for Godot Engine 3.4
 
 A GDScript ByteCode parser for Godot Engine 3.4.
 
