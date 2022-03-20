@@ -185,6 +185,9 @@ class ExprConstant extends ExprBase:
 class ExprYield extends ExprBase:
 	pass
 
+class ExprPreload extends ExprBase:
+	pass
+
 class ExprConstNaN extends ExprBase:
 	pass
 
@@ -1057,6 +1060,10 @@ func _parse_expr_const( ) -> ExprBase:
 		GDScriptByteCodeParser.Token.PR_YIELD:
 			self._next( )
 			return ExprYield.new( )
+
+		GDScriptByteCodeParser.Token.PR_PRELOAD:
+			self._next( )
+			return ExprPreload.new( )
 
 		GDScriptByteCodeParser.Token.SELF:
 			self._next( )
