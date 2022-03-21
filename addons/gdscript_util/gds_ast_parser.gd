@@ -825,7 +825,7 @@ class Operator:
 		self.type = _type
 		self.op2 = _op2
 
-var op_table:Array = [
+var op_table:Array = [	# of Array of Operator
 	# low
 	[
 		# = += -= *= /= %= &= |= <<= >>=
