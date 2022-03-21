@@ -240,6 +240,8 @@ func _get_token( ) -> GDScriptByteCodeParser.GDScriptToken:
 # -----------------------------------------------------------------------------
 
 func _optimize_token_list( ) -> void:
+	# 連続改行を最後の1つにまとめる
+	# 括弧内部の改行を全て削除
 	var i:int = 0
 	var paren_level:int = 0
 
@@ -801,18 +803,21 @@ func _parse_enum( ) -> TreeEnum:
 # -----------------------------------------------------------------------------
 
 enum OperatorType {
-	UNOP,
-	BINOP_LEFT,
-	BINOP_LEFT_PERIOD,
-	BINOP_RIGHT,
-	TRIOP,
-	FUNC,
-	INDEX,
+	UNOP,				# 単項演算子
+	BINOP_LEFT,			# 二項演算子、左結合
+	BINOP_LEFT_PERIOD,	# ピリオドのアクセス a.b （二項演算子、左結合） super時に特殊扱い
+	BINOP_RIGHT,		# 二項演算子、右結合
+	TRIOP,				# 三項演算子
+	FUNC,				# 関数呼びだし
+	INDEX,				# インデックス a[b]
 }
 
 class Operator:
+	# トークン
 	var op:int
+	# トークン（2つめ）普段は不要
 	var op2:int
+	# 結合種類
 	var type:int
 
 	func _init( _op:int, _type:int, _op2:int = -1 ):
@@ -820,7 +825,7 @@ class Operator:
 		self.type = _type
 		self.op2 = _op2
 
-var op_table = [
+var op_table:Array = [
 	# low
 	[
 		# = += -= *= /= %= &= |= <<= >>=
