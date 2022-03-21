@@ -1,7 +1,7 @@
 extends Node
 
 #
-# GDScript Parser for Godot Engine 3.4.3
+# GDScript AST Parser for Godot Engine 3.4.3
 # Programmed by あるる（きのもと 結衣） @arlez80
 #
 # MIT License
@@ -156,10 +156,12 @@ class ExprIf extends ExprBase:
 	var false_expr:ExprBase = null
 
 class ExprCallFunc extends ExprBase:
+	# callee( args )
 	var callee:ExprBase = null
 	var args:Array = []
 
 class ExprSubscription extends ExprBase:
+	# a[b]
 	var a:ExprBase = null
 	var b:ExprBase = null
 
