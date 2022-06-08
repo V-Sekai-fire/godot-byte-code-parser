@@ -324,6 +324,8 @@ func _parse_class( ) -> TreeClass:
 	# Godot Engine 3.4.4のパーサーと挙動が違う
 	# class AAA: pass
 	# この行以下が全てAAAのメンバとなってしまう
+	# バグ報告がある：
+	#    https://github.com/godotengine/godot/issues/56703
 	var cl: = self._parse_class_block( )
 	cl.identifier_id = identifier_id
 	cl.extends_identifier_id = extends_identifier_id
