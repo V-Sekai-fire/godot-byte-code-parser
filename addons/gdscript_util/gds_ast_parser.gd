@@ -1,7 +1,7 @@
 extends Node
 
 #
-# GDScript AST Parser for Godot Engine 3.4.3
+# GDScript AST Parser for Godot Engine 3.4.4
 # Programmed by あるる（きのもと 結衣） @arlez80
 #
 # MIT License
@@ -321,7 +321,7 @@ func _parse_class( ) -> TreeClass:
 		self.error = true
 		return null
 
-	# Godot Engine 3.4.3のパーサーと挙動が違う
+	# Godot Engine 3.4.4のパーサーと挙動が違う
 	# class AAA: pass
 	# この行以下が全てAAAのメンバとなってしまう
 	var cl: = self._parse_class_block( )

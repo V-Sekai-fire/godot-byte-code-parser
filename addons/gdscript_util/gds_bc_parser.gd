@@ -1,7 +1,7 @@
 extends Node
 
 #
-# GDScript Bytecode Parser for Godot Engine 3.4.3
+# GDScript Bytecode Parser for Godot Engine 3.4.4
 # Programmed by あるる（きのもと 結衣） @arlez80
 #
 # MIT License
