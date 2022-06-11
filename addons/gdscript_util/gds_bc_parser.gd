@@ -158,7 +158,7 @@ enum Token {
 	OP_BIT_OR,
 	OP_BIT_XOR,
 	OP_BIT_INVERT,
-	# OP_PLUS_PLUS,
+	# OP_PLUS_PLUS,		# ソース中に存在はするが、コメントアウトされている
 	# OP_MINUS_MINUS,
 	CF_IF,
 	CF_ELIF,

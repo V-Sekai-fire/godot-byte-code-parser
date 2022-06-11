@@ -190,20 +190,13 @@ class ExprYield extends ExprBase:
 class ExprPreload extends ExprBase:
 	pass
 
-class ExprConstNaN extends ExprBase:
+class ExprSelf extends ExprBase:
 	pass
 
-class ExprConstPI extends ExprBase:
-	pass
-
-class ExprConstTAU extends ExprBase:
-	pass
-
-class ExprConstINF extends ExprBase:
-	pass
-
-class ExprConstSelf extends ExprBase:
-	pass
+class ExprReservedConst extends ExprBase:
+	var token_id:int = 0	# GDScriptByteCodeParser.Token
+	func _init( _token_id:int ):
+		self.token_id = _token_id
 
 # -----------------------------------------------------------------------------
 
@@ -323,8 +316,8 @@ func _parse_class( ) -> TreeClass:
 
 	# Godot Engine 3.4.4のパーサーと挙動が違う
 	# class AAA: pass
-	# この行以下が全てAAAのメンバとなってしまう
-	# バグ報告がある：
+	# 1行で定義されたclassがあるとそれ以下が全てAAAのメンバとなってしまう
+	# バグ報告があるので、この挙動は実装しない
 	#    https://github.com/godotengine/godot/issues/56703
 	var cl: = self._parse_class_block( )
 	cl.identifier_id = identifier_id
@@ -810,21 +803,21 @@ enum OperatorType {
 	BINOP_LEFT_PERIOD,	# ピリオドのアクセス a.b （二項演算子、左結合） super時に特殊扱い
 	BINOP_RIGHT,		# 二項演算子、右結合
 	TRIOP,				# 三項演算子
-	FUNC,				# 関数呼びだし
+	FUNC,				# 関数呼びだし f(a)
 	INDEX,				# インデックス a[b]
 }
 
 class Operator:
 	# トークン
 	var op:int
-	# トークン（2つめ）普段は不要
+	# トークン（三項演算子用）
 	var op2:int
 	# 結合種類
-	var type:int
+	var operator_type:int
 
-	func _init( _op:int, _type:int, _op2:int = -1 ):
+	func _init( _op:int, _operator_type:int, _op2:int = -1 ):
 		self.op = _op
-		self.type = _type
+		self.operator_type = _operator_type
 		self.op2 = _op2
 
 var op_table:Array = [	# of Array of Operator
@@ -946,7 +939,7 @@ func _parse_expr( lv:int = 0 ) -> ExprBase:
 
 	for t in self.op_table[lv]:
 		if self._get_token( ).token_id == t.op:
-			match t.type:
+			match t.operator_type:
 				OperatorType.BINOP_RIGHT:
 					if left == null:
 						self.error = true
@@ -1050,21 +1043,9 @@ func _parse_expr_const( ) -> ExprBase:
 			self._next( )
 			return c
 
-		GDScriptByteCodeParser.Token.CONST_PI:
+		GDScriptByteCodeParser.Token.CONST_PI, GDScriptByteCodeParser.Token.CONST_TAU, GDScriptByteCodeParser.Token.CONST_INF, GDScriptByteCodeParser.Token.CONST_NAN:
 			self._next( )
-			return ExprConstPI.new( )
-
-		GDScriptByteCodeParser.Token.CONST_TAU:
-			self._next( )
-			return ExprConstTAU.new( )
-
-		GDScriptByteCodeParser.Token.CONST_INF:
-			self._next( )
-			return ExprConstINF.new( )
-
-		GDScriptByteCodeParser.Token.CONST_NAN:
-			self._next( )
-			return ExprConstNaN.new( )
+			return ExprReservedConst.new( self._get_token( ).token_id )
 
 		GDScriptByteCodeParser.Token.PR_YIELD:
 			self._next( )
@@ -1076,7 +1057,7 @@ func _parse_expr_const( ) -> ExprBase:
 
 		GDScriptByteCodeParser.Token.SELF:
 			self._next( )
-			return ExprConstSelf.new( )
+			return ExprSelf.new( )
 
 		GDScriptByteCodeParser.Token.IDENTIFIER:
 			var ei: = ExprIdentifier.new( )
